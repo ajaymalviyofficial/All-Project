@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Embedded YouTube</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <style>
+        .form-group {
+            margin-bottom: 10px;
+        }
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 90px;
+        }
+        .content {
+
+            width: 550px;
+            height: auto;
+            border-radius: 25px;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        input {
+            width: 250px;
+            border-radius: 25px;
+            padding: 10px;
+            margin-top: 5px;
+        }
+        label {
+            width: 200px;
+            display: inline-block;
+            position: relative;
+        }
+        #error, #success {
+            margin-bottom: 15px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        #error {
+            color: red;
+        }
+        #success {
+            color: green;
+          
+        }
+        #submit{
+            width: 130px;
+            margin-left: 207px;
+        }
+    </style>
+</head>
+<body>
+    <div id="error"></div>
+    <div id="success"></div>
+    <div class="content">
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email">
+        </div>
+        <div class="form-group">
+            <label for="number">Number</label>
+            <input type="text" name="number" id="number">
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password">
+        </div>
+        <div class="form-group">
+            <label for="copassword">Confirm Password</label>
+            <input type="password" name="copassword" id="copassword">
+        </div>
+        <input id="submit" type="button" value="Submit">
+    </div>
+
+    <script>
+        function isEmail(email) {
+            var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+            return regex.test(email);
+        }
+
+        $("#submit").click(function () {
+            var errorMessage = ""; 
+            var missingField = ""; 
+
+        
+            var email = $("#email").val();
+            var number = $("#number").val();
+            var password = $("#password").val();
+            var coPassword = $("#copassword").val();
+
+            
+            if (email === "") {
+                missingField += "<p>Email is not filled!</p>";
+            } else if (!isEmail(email)) {
+                errorMessage += "<p>Email is invalid!</p>";
+            }
+
+            if (number === "") {
+                missingField += "<p>Number is not filled!</p>";
+            }
+
+            if (password === "") {
+                missingField += "<p>Password is not filled!</p>";
+            }
+
+            if (coPassword === "") {
+                missingField += "<p>Confirm Password is not filled!</p>";
+            } else if (password !== coPassword) {
+                errorMessage += "<p>Passwords do not match!</p>";
+            }
+
+            
+            if (errorMessage === "" && missingField === "") {
+                $("#success").html("You are Registered");
+                $("#error").html(""); 
+            } else {
+                $("#error").html(errorMessage + missingField);
+                $("#success").html(""); 
+            }
+        });
+    </script>
+</body>
+</html>
