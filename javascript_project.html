@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #box{
+            width: 150px;
+            height: 150px;
+            position: relative;
+            background-color:green ;
+            border-radius: 50%;
+        }
+    
+    </style>
+</head>
+<body>
+    <h1>Reaction tester project</h1>
+   
+    <div id="box"></div>
+
+</body>
+<script>
+    //use time and date function
+     var start= new Date().getTime();
+     //use this color function 
+     function getRandomColor() {
+      var letters = '0123456789ABCDEF';
+      var color = '#';
+      for (var i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
+      function move() {
+        
+        var left = Math.random()* 300;
+        var top = Math.random()* 300;
+        var wh = ((Math.random()* 200) +100);
+        document.getElementById("box").style.left = left + "px";
+        document.getElementById("box").style.top = top + "px";
+        document.getElementById("box").style.width = wh + "px";
+        document.getElementById("box").style.height = wh + "px";
+        document.getElementById("box").style.display="block";
+        document.getElementById("box").style.backgroundColor= getRandomColor(); //color
+        start= new Date().getTime();
+    }
+    move();
+      document.getElementById("box").onclick = function () {
+      document.getElementById("box").style.display="none";
+      var end = new Date().getTime();
+      var timeTaken = (end - start) / 1000;
+      alert(timeTaken);
+      move();
+   }
+</script>
+</html> 
